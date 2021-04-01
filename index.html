@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RGB to HEX converter</title>
+  <!-- wired-elements -->
+  <script type="module" src="./JS/wired-elements-esm.js"></script>
+  <!-- home-made css -->
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header>
+    <h1>RGB → HEX</h1>
+  </header>
+
+  <main>
+    <section class="input">
+      <p>R: <span class="colorValue">0</span></p>
+      <wired-slider id="r" value="0" min="0" max="255"></wired-slider>
+      
+      <p>G: <span class="colorValue">0</span></p>
+      <wired-slider id="g" value="0" min="0" max="255"></wired-slider>
+      
+      <p>B: <span class="colorValue">0</span></p>
+      <wired-slider id="b" value="0" min="0" max="255"></wired-slider>
+    </section>
+
+    <section class="output">
+      <span id="hexCode">#000000</span><span id="colorName"></span>
+    </section>
+
+    <section class="operation">
+      <div class="copy">
+      <wired-button id="copyButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clipboard-check"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+          <path
+            d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+          <path
+            d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+        </svg>
+      </wired-button>
+      </div>
+      <div class="reset">
+      <wired-button id="resetButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eraser"
+          viewBox="0 0 16 16">
+          <path
+            d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z" />
+        </svg>
+      </wired-button>
+      </div>
+      <div class="lucky-wheel">
+      <wired-button id="luckyButton">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-shuffle"
+          viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z" />
+          <path
+            d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z" />
+        </svg>
+      </wired-button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Copyright 2021 🌈 Tzu Yin (Charlie)</p>
+  </footer>
+
+  <!-- papa parse -->
+  <script src="./JS/papaparse.min.js"></script>
+  <!-- Chroma -->
+  <script src="./JS/chroma.min.js"></script>
+  <!-- home-made JS -->
+  <script src="./JS/main.js"></script>
+</body>
+</html>

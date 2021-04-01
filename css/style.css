@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "Annie Use Your Telescope";
+  src: url(../fonts/AnnieUseYourTelescope-Regular.ttf);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Shirokuma";
+  src: url(../fonts/Shirokuma-Regular.otf);
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Annie Use Your Telescope", cursive;
+  font-size: 24px;
+  background-color: #fff;
+}
+
+/* header */
+
+header {
+  height: 72px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+/* main */
+
+main {
+  margin-bottom: 72px;
+}
+
+/* main input */
+
+.input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#r {
+  --wired-slider-knob-color: red;
+}
+
+#g {
+  --wired-slider-knob-color: green;
+}
+
+#b {
+  --wired-slider-knob-color: blue;
+}
+
+/* main output */
+
+.output {
+  margin: 12px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+}
+
+#hexCode {
+  font-size: 48px;
+}
+
+#colorName {
+  font-size: 32px;
+  font-family: 'Shirokuma';
+}
+
+/* main operation */
+
+.operation {
+  display: flex;
+  justify-content: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.copy, .reset, .lucky-wheel {
+  padding: 8px 16px;
+}
+
+wired-button {
+  display: flex;
+  height: 48px;
+  width: 48px;
+  justify-content: center;
+  align-items: center;
+}
+/* footer */
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 36px;
+  position: fixed;
+  bottom: 0px;
+  font-size: 16px;
+  background-color: #FFF;
+}
