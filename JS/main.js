@@ -6,7 +6,7 @@ const rgbValue = { r: 0, g: 0, b: 0 }
 
 // import color name
 const colorWithName = {}
-Papa.parse('../colorTickets.csv', {
+Papa.parse('./colorTickets.csv', {
   header: true,
   download: true,
   complete: function (result) {
