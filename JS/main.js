@@ -39,7 +39,7 @@ for (let i = 0; i < inputs.length; i++) {
     lookupName(hex)
 
     // adjust HEX code color
-    textColorAdjust()
+    textColorAdjust(luminanceCalculate(rgbValue.r, rgbValue.g, rgbValue.b))
   })
 }
 
@@ -48,7 +48,7 @@ document.getElementById('copyButton').addEventListener('click', () => {
   const range = document.createRange()
   range.selectNode(hexCodeSpan)
   window.getSelection().removeAllRanges() // clear current selection
-  window.getSelection().addRange(range) // to select text
+  window.getSelection().addRange(range) // select text
   document.execCommand('copy')
   window.getSelection().removeAllRanges() // deselect
 
@@ -81,7 +81,7 @@ document.getElementById('luckyButton').addEventListener('click', () => {
   lookupName(hex)
 
   // adjust HEX code color
-  textColorAdjust()
+  textColorAdjust(luminanceCalculate(rgbValue.r, rgbValue.g, rgbValue.b))
 })
 
 // reset button
@@ -108,13 +108,18 @@ document.getElementById('resetButton').addEventListener('click', () => {
   colorNameSpan.textContent = ''
 
   // adjust HEX code color
-  textColorAdjust()
+  textColorAdjust(luminanceCalculate(rgbValue.r, rgbValue.g, rgbValue.b))
 })
 
 // functions
 // set bg-color
-function setBackgroundColor (target, r = 0, g = 0, b = 0) {
-  document.querySelector(target).style.background = `rgb(${r}, ${g}, ${b})`
+function setBackgroundColor (element, r = 0, g = 0, b = 0) {
+  document.querySelector(element).style.background = `rgb(${r}, ${g}, ${b})`
+}
+
+// set text color
+function setTextColor (element, r = 0, g = 0, b = 0) {
+  document.querySelector(element).style.color = `rgb(${r}, ${g}, ${b})`
 }
 
 // RGB to HEX
@@ -125,26 +130,28 @@ function rgbToHex (r, g, b) {
   return `#${rHex}${gHex}${bHex}`
 }
 
-// HEX code color adjust
-function textColorAdjust () {
-  // RGB to HSL
-  const rawHSL = chroma(`rgb(${rgbValue.r}, ${rgbValue.g}, ${rgbValue.b})`).hsl()
-  let textHSL
-  // if Lightness >= 50%
-  if (rawHSL[2].toFixed(2) >= 0.5) {
-    textHSL = ['0deg', '0%', '0%']
-  } else {
-    textHSL = ['0deg', '0%', '100%']
-  }
-  hexCodeSpan.style.color = colorNameSpan.style.color = `hsl(${textHSL[0]}, ${textHSL[1]}, ${textHSL[2]}`
-}
-
 // Check if HEX code color has name
 function lookupName (hexCode) {
   const colorIndex = Object.values(colorWithName).indexOf(hexCode)
-  if (Object.values(colorWithName).indexOf(hexCode) > -1) {
-    colorNameSpan.textContent = `:${Object.keys(colorWithName)[colorIndex].replaceAll('"', '')}`
-  } else {
-    colorNameSpan.textContent = ''
-  }
+  Object.values(colorWithName).indexOf(hexCode) > -1
+    ? colorNameSpan.textContent = `:${Object.keys(colorWithName)[colorIndex].replaceAll('"', '')}`
+    : colorNameSpan.textContent = ''
+}
+
+// Calculate relative luminance
+function luminanceCalculate (r, g, b) {
+  const luminance = [r, g, b].map(function (value) {
+    value /= 255
+    return value <= 0.03928
+      ? value / 12.92
+      : Math.pow((value + 0.055) / 1.055, 2.4)
+  })
+  return luminance[0] * 0.2126 + luminance[1] * 0.7152 + luminance[2] * 0.0722
+}
+
+// Adjust text color
+function textColorAdjust (luminance) {
+  1.05 / (luminance + 0.05) < 4
+    ? setTextColor('#hexCode')
+    : setTextColor('#hexCode', 255, 255, 255)
 }
