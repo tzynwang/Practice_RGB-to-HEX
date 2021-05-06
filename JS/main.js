@@ -133,7 +133,7 @@ elementObjects.luckyButton.addEventListener('click', () => {
 })
 
 // reset button
-document.getElementById('resetButton').addEventListener('click', () => {
+elementObjects.resetButton.addEventListener('click', () => {
   controller.resetRGBValue()
   view.setBackgroundColor('.output')
   view.setInputsValue(elementObjects.inputs)
